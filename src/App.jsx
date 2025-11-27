@@ -10,10 +10,14 @@ function App() {
     "age": 1
   }
 
+  const addNewToDoFunc = (name) => {
+    alert(`hello ${name}`)
+  }
+
   return (
     <div className="todo-container">
       <div className="todo-title">Todo List</div>
-      <ToDoNew />
+      <ToDoNew addNewToDoFunc={addNewToDoFunc} />
       <ToDoData data={data} />
       <div className="todo-image">
         <img src={reactImage} className="logo" />
