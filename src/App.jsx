@@ -11,8 +11,18 @@ function App() {
     "age": 1
   }
 
+  const randomIntFromInterval = (min, max) => { // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
   const addNewToDoFunc = (name) => {
-    alert(`hello ${name}`)
+    const newTodo = {
+      "id": randomIntFromInterval(10, 10000),
+      "name": name
+    }
+
+
+    setTodoList([...todoList, newTodo])
   }
 
   const [todoList, setTodoList] = useState([

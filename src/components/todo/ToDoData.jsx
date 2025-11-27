@@ -3,10 +3,18 @@ const ToDoData = (props) => {
     console.log(props.todoList)
     return (
         <div className="todo-data">
-            <div>{data.name}-{data.age}</div>
+            {props.todoList.map((item, index) => {
+                return (
+                    <div className="todo-item" key={item.id}>
+                        <div>{item.name}</div>
+                        <button>Delete</button>
+                    </div>
+                )
+            })}
+            {/* <div>{data.name}-{data.age}</div>
             <div>LEarning ReactJS</div>
             <div>Watching youtube</div>
-            <div>{JSON.stringify(props.todoList)}</div>
+            <div>{JSON.stringify(props.todoList)}</div> */}
         </div>
     );
 }

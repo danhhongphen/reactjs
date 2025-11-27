@@ -5,7 +5,9 @@ const ToDoNew = (props) => {
     const [valueInput, setValueInput] = useState("Phanh");
     const addNewToDoFunc = props.addNewToDoFunc;
     const handleClick = () => {
-        console.log("input" + valueInput)
+        console.log("input" + valueInput);
+        addNewToDoFunc(valueInput);
+        setValueInput("");
     }
 
     const handleOnChange = (text) => {
@@ -13,19 +15,16 @@ const ToDoNew = (props) => {
         setValueInput(text);
     }
 
-
-
-    // addNewToDoFunc("cam");
     return (
         <div className="todo-new">
             <input type="text"
                 onChange={(event) => { handleOnChange(event.target.value) }}
+                value={valueInput}
             ></input>
             <button
                 style={{ cursor: "pointer" }}
                 onClick={handleClick}
             >Add</button>
-            <div>{valueInput}</div>
         </div>
     );
 }
