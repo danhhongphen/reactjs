@@ -11,11 +11,26 @@ import RegisterPage from './pages/RegisterPage.jsx';
 import UserPage from './pages/UserPage.jsx';
 import ProductPage from './pages/ProductPage.jsx';
 import "./styles/global.css"
+import ToDoApp from './components/todo/ToDoApp.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <ToDoApp />
+      },
+      {
+        path: "/users",
+        element: <UserPage />
+      },
+      {
+        path: "/products",
+        element: <ProductPage />
+      }
+    ]
   },
   {
     path: "/login",
@@ -24,14 +39,6 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />
-  },
-  {
-    path: "/users",
-    element: <UserPage />
-  },
-  {
-    path: "/products",
-    element: <ProductPage />
   }
 ]);
 
