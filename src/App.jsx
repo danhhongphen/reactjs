@@ -21,29 +21,27 @@ function App() {
       "name": name
     }
 
-
     setTodoList([...todoList, newTodo])
   }
 
-  const [todoList, setTodoList] = useState([
-    {
-      id: 1,
-      name: "Learning React"
-    },
-    {
-      id: 2,
-      name: "Watching Youtube"
-    }
-  ])
+  const removeToDoFunc = (id) => {
+    const afterRemove = todoList.filter(item => item.id !== id);
+    setTodoList(afterRemove);
+  }
+
+  const [todoList, setTodoList] = useState([])
 
   return (
     <div className="todo-container">
       <div className="todo-title">Todo List</div>
       <ToDoNew addNewToDoFunc={addNewToDoFunc} />
-      <ToDoData data={data} todoList={todoList} />
-      <div className="todo-image">
-        <img src={reactImage} className="logo" />
-      </div>
+      {todoList.length > 0 ?
+        <ToDoData data={data} todoList={todoList} removeToDoFunc={removeToDoFunc} />
+        :
+        <div className="todo-image">
+          <img src={reactImage} className="logo" />
+        </div>
+      }
     </div>
   )
 }
