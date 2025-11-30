@@ -1,8 +1,15 @@
-
+import UserFormComponent from "../components/user/UserFormComponent";
+import UserTableComponent from "../components/user/UserTableComponent";
+import React from 'react';
 
 const UserPage = () => {
     return (
-        <div>User page</div>
+        <>
+            <div>
+                <UserFormComponent />
+                <UserTableComponent />
+            </div>
+        </>
     );
 }
 
