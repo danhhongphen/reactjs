@@ -5,13 +5,11 @@ const ToDoNew = (props) => {
     const [valueInput, setValueInput] = useState("Phanh");
     const addNewToDoFunc = props.addNewToDoFunc;
     const handleClick = () => {
-        console.log("input" + valueInput);
         addNewToDoFunc(valueInput);
         setValueInput("");
     }
 
     const handleOnChange = (text) => {
-        console.log(text);
         setValueInput(text);
     }
 

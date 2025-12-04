@@ -1,6 +1,5 @@
 const ToDoData = (props) => {
     const data = props.data;
-    console.log(props.todoList);
     const removeToDoFunc = props.removeToDoFunc;
 
     const deleteTodoItem = (id) => {

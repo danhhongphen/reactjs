@@ -13,7 +13,6 @@ const UserFormComponent = (props) => {
 
     const handleSubmitCreateUserButton = async () => {
         const response = await CreateUserAPI(fullName, email, password, phoneNumber);
-        console.log("API Response:", response);
         if (response.data) {
             api.success({
                 message: "Create user successfully",

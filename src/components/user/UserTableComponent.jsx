@@ -3,11 +3,10 @@ import { Button, Drawer, Flex, Popconfirm, Space, Table, Tag, message } from 'an
 import UpdateUserComponent from './UpdateUserComponent';
 import { useState } from 'react';
 import UserDetailComponent from './UserDetailComponent';
-import DeleteUserComponent from './DeleteUserComponent';
 import { DeleteUserAPI } from '../service/api.service';
 
 const UserTableComponent = (props) => {
-    const { dataUser, fetchUsers } = props;
+    const { dataUser, fetchUsers, current, setCurrent, pageSize, setPageSize, total, setTotal } = props;
     const [isModalUpdateOpen, setIsModelUpdateOpen] = useState(false);
     const [dataUpdate, setDataUpdate] = useState(null);
     const [open, setOpen] = useState(false);
@@ -97,9 +96,37 @@ const UserTableComponent = (props) => {
         }
     ];
 
+    const onChangeTable = (pagination, filters, sorter, extra) => {
+        console.log("paging on change");
+        if (pagination && pagination.current) {
+            if (+pagination.current !== +current) {
+                setCurrent(pagination.current);
+            }
+        }
+        if (pagination && pagination.pageSize) {
+            if (+pagination.pageSize !== +pageSize) {
+                setPageSize(pagination.pageSize);
+            }
+        }
+    };
+
     return (
         <>
-            <Table columns={columns} dataSource={dataUser} rowKey={"_id"} />
+            <Table
+                columns={columns}
+                dataSource={dataUser}
+                rowKey={"_id"}
+                pagination={
+                    {
+                        current: current,
+                        pageSize: pageSize,
+                        showSizeChanger: true,
+                        total: total,
+                        showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total} rows</div>) }
+                    }
+                }
+                onChange={onChangeTable}
+            />
             <UpdateUserComponent
                 isModalUpdateOpen={isModalUpdateOpen}
                 setIsModelUpdateOpen={setIsModelUpdateOpen}
@@ -112,6 +139,7 @@ const UserTableComponent = (props) => {
                 setOpen={setOpen}
                 dataDetail={dataDetail}
                 setDataDetail={setDataDetail}
+                fetchUsers={fetchUsers}
             />
             {/* <DeleteUserComponent
                 dataDelete={dataDelete}

@@ -10,8 +10,8 @@ const UpdateUserComponent = (props) => {
     const [phoneNumber, setPhoneNumber] = useState("");
 
     useEffect(() => {
-        console.log(">>> check updateData props ", dataUpdate);
         if (dataUpdate) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setId(dataUpdate._id);
             setFullName(dataUpdate.fullName);
             setPhoneNumber(dataUpdate.phone);
@@ -20,7 +20,6 @@ const UpdateUserComponent = (props) => {
 
     const handleSubmitUpdateUserButton = async () => {
         const response = await UpdateUserAPI(id, fullName, phoneNumber);
-        console.log("API Update Response:", response);
         if (response.data) {
             api.success({
                 message: "Update user successfully",
