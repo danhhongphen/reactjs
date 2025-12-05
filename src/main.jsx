@@ -13,6 +13,7 @@ import BookPage from './pages/BookPage.jsx';
 import "./styles/global.css"
 import ToDoApp from './components/todo/ToDoApp.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
+import { AuthWrapper } from './components/context/AuthContextComponent.jsx';
 
 const router = createBrowserRouter([
   {
@@ -49,5 +50,8 @@ createRoot(document.getElementById('root')).render(
 
   //   {/* <App /> */}
   // </StrictMode>,
-  <RouterProvider router={router} />
+  <AuthWrapper>
+    <RouterProvider router={router} />
+  </AuthWrapper>
+
 )

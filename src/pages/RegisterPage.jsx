@@ -1,6 +1,6 @@
-import { Form, Button, Input, notification, Row, Col } from "antd";
+import { Form, Button, Input, notification, Row, Col, Divider } from "antd";
 import { RegisterUserAPI } from "../components/service/api.service";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const RegisterPage = () => {
@@ -108,11 +108,17 @@ const RegisterPage = () => {
                         </Form.Item>
                     </Col>
                 </Row>
-                <Form.Item label={null}>
-                    <Button type="primary" htmlType="submit">
-                        Register
-                    </Button>
-                </Form.Item>
+                <Row>
+                    <Col>
+                        <div>
+                            <Button type="primary" htmlType="submit">
+                                Register
+                            </Button>
+                        </div>
+                        <Divider />
+                        <div>Already have existed account? <Link to={"/login"}>Login here</Link > </div>
+                    </Col>
+                </Row>
             </Form >
         </>
     );
