@@ -7,12 +7,17 @@ const instance = axios.create({
 });
 
 // Alter defaults after instance has been created
-const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInBob25lIjoiMTIzNDU2Nzg5IiwiZnVsbE5hbWUiOiJJJ20gQWRtaW5uIiwicm9sZSI6IkFETUlOIiwic3ViIjoiNjkyYjExYzczOWVhZDIwNWZhZGIxMWFlIiwiYXZhdGFyIjoiMjEyMzJmMjk3YTU3YTVhNzQzODk0YTBlNGE4MDFmYzMucG5nIiwiaWF0IjoxNzY0OTA1NzQxLCJleHAiOjE3NjQ5NDE3NDF9.cBBFCKsdEa4l1fkwuM-kgQbpWVEipk_5rPJInR9EbaE";
-instance.defaults.headers.common['Authorization'] = `Bearer ${AUTH_TOKEN}`;
+// const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInBob25lIjoiMTIzNDU2Nzg5IiwiZnVsbE5hbWUiOiJJJ20gQWRtaW5uIiwicm9sZSI6IkFETUlOIiwic3ViIjoiNjkyYjExYzczOWVhZDIwNWZhZGIxMWFlIiwiYXZhdGFyIjoiMjEyMzJmMjk3YTU3YTVhNzQzODk0YTBlNGE4MDFmYzMucG5nIiwiaWF0IjoxNzY0OTA1NzQxLCJleHAiOjE3NjQ5NDE3NDF9.cBBFCKsdEa4l1fkwuM-kgQbpWVEipk_5rPJInR9EbaE";
+// instance.defaults.headers.common['Authorization'] = `Bearer ${AUTH_TOKEN}`;
 
 // Add a request interceptor
 instance.interceptors.request.use(function (config) {
     // Do something before request is sent
+    if (typeof window !== "undefined" && window && window.localStorage &&
+        window.localStorage.getItem('access_token')) {
+        config.headers.Authorization = 'Bearer ' + window.localStorage.getItem('access_token');
+    }
+
     return config;
 }, function (error) {
     // Do something with request error

@@ -14,6 +14,7 @@ import "./styles/global.css"
 import ToDoApp from './components/todo/ToDoApp.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 import { AuthWrapper } from './components/context/AuthContextComponent.jsx';
+import PrivateRoute from './pages/PrivateRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/books",
-        element: <BookPage />
+        element: (
+          <PrivateRoute>
+            <BookPage />
+          </PrivateRoute>
+        )
       }
     ]
   },

@@ -1,13 +1,34 @@
 import { Link, NavLink } from "react-router-dom";
 import { AliwangwangOutlined, AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { Menu } from 'antd';
+import { Menu, message } from 'antd';
 import { Children, useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContextComponent";
+import { LogoutAPI } from "../service/api.service";
 
 const Header = () => {
     const [current, setCurrent] = useState('');
-    const { user } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
     console.log("check context data on header: " + JSON.stringify(user));
+
+    const handleLogout = async () => {
+        debugger;
+        const response = await LogoutAPI();
+        if (response.data) {
+            setUser({
+                "email": "",
+                "phone": "",
+                "fullName": "",
+                "role": "",
+                "avatar": "",
+                "id": ""
+            });
+            localStorage.removeItem("access_token");
+            message.success({
+                message: "Logout successfully"
+            });
+        }
+
+    }
 
     const items = [
         {
@@ -28,7 +49,7 @@ const Header = () => {
         },
         ...(!user.id ? [{
             label: <Link to="/login">Login</Link>,
-            key: 'book',
+            key: 'login',
             icon: <SettingOutlined />,
 
         }] : []),
@@ -38,7 +59,7 @@ const Header = () => {
             icon: <AliwangwangOutlined />,
             children: [
                 {
-                    label: "Logout",
+                    label: (<span onClick={() => { handleLogout() }}>Logout</span>),
                     key: "logout"
                 }
 

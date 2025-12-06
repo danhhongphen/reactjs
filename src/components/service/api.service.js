@@ -77,9 +77,45 @@ const LoginApi = (userName, password) => {
     return axios.post(BACKEND_URL, data);
 }
 
+const GetUserInfo = () => {
+    const BACKEND_URL = "/api/v1/auth/account";
+
+    return axios.get(BACKEND_URL);
+}
+
+const LogoutAPI = () => {
+    const BACKEND_URL = "/api/v1/auth/logout";
+
+    return axios.post(BACKEND_URL);
+}
+
+
+const FetchAllBookAPI = (current, pageSize) => {
+    const BACKEND_URL = `/api/v1/book?current=${current}&pageSize=${pageSize}`;
+
+    return axios.get(BACKEND_URL);
+}
+
+const CreateBookAPI = (name, price, quantity, author, category, thumbnail) => {
+    const BACKEND_URL = "/api/v1/book";
+    const data = {
+        "slider": [],
+        mainText: name,
+        price: price,
+        quantity: quantity,
+        author: author,
+        category: category,
+        thumbnail: thumbnail,
+        "sold": 1
+    }
+
+    return axios.post(BACKEND_URL, data);
+}
+
 export {
     CreateUserAPI, FetchAllUserAPI,
     UpdateUserAPI, DeleteUserAPI,
     UploadFileAPI, RegisterUserAPI,
-    LoginApi
+    LoginApi, GetUserInfo, LogoutAPI,
+    FetchAllBookAPI, CreateBookAPI
 };
